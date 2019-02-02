@@ -18,6 +18,7 @@ class ArticleController extends Controller
         return view('articles.index', [
             'articles' => Article::get(),
             'users' => User::get(),
+            'trashedArticles' => Article::onlyTrashed()->get(),
         ]);
     }
 
@@ -91,6 +92,13 @@ class ArticleController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Article::find($id)->delete();
+        return redirect()->route('articles.index');
+    }
+
+    public function restore($id)
+    {
+        Article::withTrashed()->find($id)->restore();
+        return redirect()->route('articles.index');
     }
 }

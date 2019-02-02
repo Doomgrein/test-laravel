@@ -69,7 +69,8 @@
                                             <span class="name">{{ $user->first_name }}<br></span>
                                             <span class="surname">{{ $user->second_name }}</span>
                                         </div>
-                                        <a href="" class="phone">{{ $user->phone }}</a>
+                                        <p>Номер:</p>
+                                        <p><i>{{ $user->phone }}</i></p>
                                     </div>
                                 </div>
                                 @endif

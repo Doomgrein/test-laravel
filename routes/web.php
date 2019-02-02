@@ -15,3 +15,4 @@ Route::get('/', 'IndexController@index');
 
 Route::resource('articles', 'ArticleController');
 Route::resource('users', 'UserController');
+Route::post('articles/{article}/restore', 'ArticleController@restore')->name('articles.restore');
