@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Article;
+use App\Http\Requests\Users\StoreRequest;
 use App\User;
 use Illuminate\Http\Request;
 use Intervention\Image\Facades\Image;
@@ -39,7 +40,7 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreRequest $request)
     {
         $user = User::create($request->all());
 

@@ -41,15 +41,15 @@
                 @empty
                     <tr>
                         <td class="table-text" colspan="4">
-                            <div>Данные отсутствуют</div>
+                            <div>Создайте пользователя - он будет отображён в данной таблице</div>
                         </td>
                     </tr>
                 @endforelse
                 </tbody>
-                <tfoot>
-
-                </tfoot>
             </table>
+            <a href="{{ route('articles.index') }}" class="btn btn-primary" role="button">
+                Перейти на страницу управления статьями
+            </a>
         </div>
         <div class="panel-body">
             <div class="container">
@@ -61,7 +61,7 @@
                                 @if (!empty($user))
                                 <div class="profile">
                                     <div class="avatar">
-                                        <img src="images/{{ $user->avatar }}" alt="Аватар" class="avatar__pic">
+                                        <img src="images/{{ $user->avatar }}" alt="" class="avatar__pic">
                                     </div>
                                     <div class="information">
                                         <div class="nickname">{{ $user->nickname }}</div>
@@ -75,6 +75,10 @@
                                 </div>
                                 @endif
                             </div>
+                        </div>
+                        <!-- Сообщение об ошибках валидации -->
+                        <div class="box-body col-md-6">
+                            @include('errors')
                         </div>
 
                         {{ Form::open(['route' => 'users.store', 'files' => true]) }}
@@ -102,12 +106,8 @@
                                         <li class="form__item">
                                             <label class='form__label' for="articles">Статьи:</label>
                                             @foreach ($articles as $article)
-                                                <ul>
-                                                    <li>
                                                         <input id="articles" type="checkbox" name="articles[]" value="{{ $article->id }}">
-                                                        <label class=""> {{ ucfirst($article->theme) }}</label>
-                                                    </li>
-                                                </ul>
+                                                        <label class=""> {{ ucfirst($article->theme) }} <br> </label>
                                             @endforeach
                                         </li>
                                         <li class="form__item">

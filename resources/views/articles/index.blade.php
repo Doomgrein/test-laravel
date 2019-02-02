@@ -20,7 +20,6 @@
                 <tbody>
                 @forelse($articles as $article)
                     <tr>
-                        <!-- Имя задачи -->
                         <td class="table-text">
                             <div>{{ $article->theme }}</div>
                         </td>
@@ -59,50 +58,57 @@
                                 </div>
                             </div>
                         </td>
-
                     </tr>
                 @empty
                     <tr>
                         <td class="table-text" colspan="4">
-                            <div>Данные отсутствуют</div>
+                            <div>Создайте статью - она будет отображена в данной таблице</div>
                         </td>
                     </tr>
                 @endforelse
                 </tbody>
-                <tfoot>
-
-                </tfoot>
             </table>
+
+            <!-- Сообщение об ошибках валидации -->
+            <div class="box-body col-md-6">
+                @include('errors')
+            </div>
         </div>
 
-        {{ Form::open(['route' => 'articles.store', 'class' => 'form']) }}
-        <div class="row">
-            <div class="panel panel-default">
-                <div class="box-body">
-                    <div class='edit-profile'>
-                        <h2 class="heading"> Создать статью: </h2>
-                        <form class='form' id='form' method='POST' enctype='multipart/form-data'>
-                            <ul>
-                                <li class="form__item">
-                                    <label class='form__label' for="users">Авторы:</label>
-                                    @foreach ($users as $user)
-                                        <input id="users" type="checkbox" name="users[]" value="{{ $user->id }}">
-                                        <label class=""> {{ ucfirst($user->nickname) }} <br> </label>
-                                    @endforeach
-                                </li>
-                                <li class="form__item">
-                                    <label class='form__label' for="theme">Тема:</label>
-                                    <input class='form__input' id='theme' type="text" name="theme">
-                                </li>
-                                <li class="form__item">
-                                    <label class='form__label' for="text">Текст:</label>
-                                    <input class='form__input' id='text' type="text" name="text">
-                                </li>
-                                <li class="form__item">
-                                    <button class='form__button' type="submit">Отправить</button>
-                                </li>
-                            </ul>
-                        </form>
+        <a href="{{ route('users.index') }}" class="btn btn-primary" role="button">
+            Перейти на страницу управления пользователями
+        </a>
+
+        {{ Form::open(['route' => 'articles.store']) }}
+        <div class="panel-body">
+            <div class="row">
+                <div class="panel panel-default">
+                    <div class="box-body col-md-6">
+                        <div class='edit-profile'>
+                            <h2 class="heading"> Создать статью: </h2>
+                            <form class='form' id='form' method='POST' enctype='multipart/form-data'>
+                                <ul>
+                                    <li class="form__item">
+                                        <label class='form__label' for="users">Авторы:</label>
+                                        @foreach ($users as $user)
+                                            <input id="users" type="checkbox" name="users[]" value="{{ $user->id }}">
+                                            <label class=""> {{ ucfirst($user->nickname) }} <br> </label>
+                                        @endforeach
+                                    </li>
+                                    <li class="form__item">
+                                        <label class='form__label' for="theme">Тема:</label>
+                                        <input class='form__input' id='theme' type="text" name="theme">
+                                    </li>
+                                    <li class="form__item">
+                                        <label class='form__label' for="text">Текст:</label>
+                                        <input class='form__input' id='text' type="text" name="text">
+                                    </li>
+                                    <li class="form__item">
+                                        <button class='form__button' type="submit">Отправить</button>
+                                    </li>
+                                </ul>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -166,7 +172,6 @@
                                 </div>
                             </div>
                         </td>
-
                     </tr>
                 @empty
                     <tr>
@@ -176,9 +181,6 @@
                     </tr>
                 @endforelse
                 </tbody>
-                <tfoot>
-
-                </tfoot>
             </table>
         </div>
     </div>
