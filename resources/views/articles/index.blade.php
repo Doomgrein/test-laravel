@@ -35,7 +35,7 @@
                     </tr>
                 @empty
                     <tr>
-                        <td class="table-text">
+                        <td class="table-text" colspan="4">
                             <div>Данные отсутствуют</div>
                         </td>
                     </tr>
@@ -47,26 +47,28 @@
             </table>
         </div>
 
+        {{ Form::open(['route' => 'articles.store', 'class' => 'form']) }}
         <div class="row">
             <div class="panel panel-default">
                 <div class="box-body">
                     <div class='edit-profile'>
                         <h2 class="heading"> Создать статью: </h2>
                         <form class='form' id='form' method='POST' enctype='multipart/form-data'>
-                            <ul class="form__list">
+                            <ul>
                                 <li class="form__item">
                                     <label class='form__label' for="users">Авторы:</label>
-                                    <select class="form__label" name="user_id" id="users">
-                                        <option value="0" disable="true" selected="true"> Выберите автора </option>
-                                    </select>
+                                    @foreach ($users as $user)
+                                        <input id="users" type="checkbox" name="users[]" value="{{ $user->id }}">
+                                        <label class=""> {{ ucfirst($user->nickname) }} <br> </label>
+                                    @endforeach
                                 </li>
                                 <li class="form__item">
-                                    <label class='form__label' for="nickname">Тема:</label>
-                                    <input class='form__input' id='nickname' type="text">
+                                    <label class='form__label' for="theme">Тема:</label>
+                                    <input class='form__input' id='theme' type="text" name="theme">
                                 </li>
                                 <li class="form__item">
-                                    <label class='form__label' for="name">Текст:</label>
-                                    <input class='form__input' id='name' type="text">
+                                    <label class='form__label' for="text">Текст:</label>
+                                    <input class='form__input' id='text' type="text" name="text">
                                 </li>
                                 <li class="form__item">
                                     <button class='form__button' type="submit">Отправить</button>
@@ -77,6 +79,7 @@
                 </div>
             </div>
         </div>
+        {{ Form::close() }}
     </div>
 
 @endsection

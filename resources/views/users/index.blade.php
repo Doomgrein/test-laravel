@@ -40,7 +40,7 @@
                     </tr>
                 @empty
                     <tr>
-                        <td class="table-text">
+                        <td class="table-text" colspan="4">
                             <div>Данные отсутствуют</div>
                         </td>
                     </tr>
@@ -58,6 +58,7 @@
                         <div class="box-body col-md-6">
                             <div class="my-profile">
                                 <h2 class="heading">Мой профиль</h2>
+                                @if (!empty($user))
                                 <div class="profile">
                                     <div class="avatar">
                                         <img src="images/{{ $user->avatar }}" alt="Аватар" class="avatar__pic">
@@ -68,9 +69,10 @@
                                             <span class="name">{{ $user->first_name }}<br></span>
                                             <span class="surname">{{ $user->second_name }}</span>
                                         </div>
-                                        <a href='tel:+11111111' class="phone">{{ $user->phone }}</a>
+                                        <a href="" class="phone">{{ $user->phone }}</a>
                                     </div>
                                 </div>
+                                @endif
                             </div>
                         </div>
 

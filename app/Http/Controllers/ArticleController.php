@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Article;
+use App\User;
 use Illuminate\Http\Request;
 
 class ArticleController extends Controller
@@ -16,6 +17,7 @@ class ArticleController extends Controller
     {
         return view('articles.index', [
             'articles' => Article::get(),
+            'users' => User::get(),
         ]);
     }
 
@@ -37,7 +39,14 @@ class ArticleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $article = Article::create($request->all());
+
+        if($request->input('users'))
+        {
+            $article->users()->attach($request->input('users'));
+        }
+
+        return redirect()->route('articles.index', $article);
     }
 
     /**
